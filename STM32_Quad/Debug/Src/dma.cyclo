@@ -1,0 +1,5 @@
+../Src/dma.c:11:6:dma_monitor	1
+../Src/dma.c:28:6:dma_gps_transmit	1
+../Src/dma.c:47:6:dma_gps_receive	1
+../Src/dma.c:65:6:DMA1_Channel7_IRQHandler	2
+../Src/dma.c:73:6:DMA1_Channel2_IRQHandler	2

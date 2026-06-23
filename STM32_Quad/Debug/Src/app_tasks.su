@@ -1,0 +1,4 @@
+../Src/app_tasks.c:21:6:adc_task	24	static
+../Src/app_tasks.c:36:6:i2c_task	24	static
+../Src/app_tasks.c:52:6:uart_task	24	static
+../Src/app_tasks.c:78:6:LED_task	16	static

@@ -1,0 +1,4 @@
+../Src/app_tasks.c:21:6:adc_task	1
+../Src/app_tasks.c:36:6:i2c_task	1
+../Src/app_tasks.c:52:6:uart_task	4
+../Src/app_tasks.c:78:6:LED_task	1
