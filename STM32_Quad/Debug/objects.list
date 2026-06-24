@@ -1,5 +1,6 @@
 "./Src/dma.o"
 "./Src/gnss.o"
+"./Src/i2c.o"
 "./Src/interrupt.o"
 "./Src/main.o"
 "./Src/syscalls.o"

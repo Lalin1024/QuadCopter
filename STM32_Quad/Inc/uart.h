@@ -13,4 +13,6 @@
 void uart_init();
 void uart_write(const char* value);
 void uart_write_int(uint32_t num);
+void disable_gnss(uint8_t  *arr,uint8_t size);
+
 #endif /* UART_H_ */

@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Src/dma.c \
 ../Src/gnss.c \
+../Src/i2c.c \
 ../Src/interrupt.c \
 ../Src/main.c \
 ../Src/syscalls.c \
@@ -17,6 +18,7 @@ C_SRCS += \
 OBJS += \
 ./Src/dma.o \
 ./Src/gnss.o \
+./Src/i2c.o \
 ./Src/interrupt.o \
 ./Src/main.o \
 ./Src/syscalls.o \
@@ -27,6 +29,7 @@ OBJS += \
 C_DEPS += \
 ./Src/dma.d \
 ./Src/gnss.d \
+./Src/i2c.d \
 ./Src/interrupt.d \
 ./Src/main.d \
 ./Src/syscalls.d \
@@ -42,7 +45,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/dma.cyclo ./Src/dma.d ./Src/dma.o ./Src/dma.su ./Src/gnss.cyclo ./Src/gnss.d ./Src/gnss.o ./Src/gnss.su ./Src/interrupt.cyclo ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/timer.cyclo ./Src/timer.d ./Src/timer.o ./Src/timer.su ./Src/uart.cyclo ./Src/uart.d ./Src/uart.o ./Src/uart.su
+	-$(RM) ./Src/dma.cyclo ./Src/dma.d ./Src/dma.o ./Src/dma.su ./Src/gnss.cyclo ./Src/gnss.d ./Src/gnss.o ./Src/gnss.su ./Src/i2c.cyclo ./Src/i2c.d ./Src/i2c.o ./Src/i2c.su ./Src/interrupt.cyclo ./Src/interrupt.d ./Src/interrupt.o ./Src/interrupt.su ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/timer.cyclo ./Src/timer.d ./Src/timer.o ./Src/timer.su ./Src/uart.cyclo ./Src/uart.d ./Src/uart.o ./Src/uart.su
 
 .PHONY: clean-Src
 

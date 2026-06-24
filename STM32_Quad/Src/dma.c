@@ -17,31 +17,13 @@ void dma_monitor(const char* msg,uint8_t size)
 
 	DMA1_Channel7->CNDTR=size;
 
-	DMA1_Channel7->CCR|=((1U<<12)|(1U<<4)|(1U<<5)|(1U<<7)|(0U<<8)|(0U<<10)|(1U<<1));
+	DMA1_Channel7->CCR|=((1U<<12)|(1U<<4)|(0U<<5)|(1U<<7)|(0U<<8)|(0U<<10)|(1U<<1));
 
 	DMA1_CSELR->CSELR|=(1U<<25);
 
 	DMA1_Channel7->CCR|=(1U<<0); //Enable DMA
 }
 
-
-void dma_gps_transmit(uint8_t *data,uint8_t size)
-{
-	RCC->AHB1ENR|=(1U<<0);
-
-	DMA1_Channel2->CPAR=(uint32_t)&(USART3->TDR);
-
-	DMA1_Channel2->CMAR=(uint32_t)data;
-
-	DMA1_Channel2->CNDTR=size;
-
-	DMA1_Channel2->CCR|=((1U<<13)|(1U<<4)|(0U<<5)|(1U<<7)|(0U<<8)|(0U<<10)|(1U<<1));
-
-	DMA1_CSELR->CSELR|=(1U<<5);
-
-	DMA1_Channel2->CCR|=(1U<<0);
-
-}
 
 
 void dma_gps_receive(const char *data,uint8_t size)
@@ -70,13 +52,7 @@ void DMA1_Channel7_IRQHandler()
 	}
 }
 
-void DMA1_Channel2_IRQHandler()
-{
-	if(DMA1->ISR & (1U<<5))
-	{
-		DMA1->IFCR|=(1U<<5);
-	}
-}
+
 
 
 

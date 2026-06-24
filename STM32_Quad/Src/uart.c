@@ -43,7 +43,7 @@ void uart_init( )
 	USART3->CR1|=(1U<<0);
 
 	USART2->CR3|=(1U<<7);//Enabling DMA for USART2_TX
-	USART3->CR3|=(1U<<7);//Enabling DMA for USART3_TX
+	//USART3->CR3|=(1U<<7);//Enabling DMA for USART3_TX
 	USART3->CR3|=(1U<<6);//Enabling DMA for USART3_RX
 
 	USART2->CR1|=(1U<<3);
@@ -61,6 +61,17 @@ void uart_write(const char* value)
 		USART2->TDR=(*value++);
 	}
 }
+
+
+void disable_gnss(uint8_t  *arr,uint8_t size)
+{
+	for(int i=0;i<size;i++)
+	{
+		while(!(USART3->ISR & (1U<<7))){}
+					USART3->TDR=arr[i];
+	}
+}
+
 
 void uart_write_int(uint32_t num)
 {

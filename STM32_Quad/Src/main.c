@@ -8,23 +8,38 @@
 const char* msg="Dragon\r\n";
 char a;
 volatile int i=0;
-char buff[256];
+char buff[149];
 uint8_t read_flag=0,j=0,gga_flag=0,rmc_flag=0;;
 
 uint32_t output=0;
 
 //gps gp1;
 
-void USART3_IRQHandler();
+//void USART3_IRQHandler();
+void DMA1_Channel3_IRQHandler();
+
+void DMA1_Channel2_IRQHandler();
 
 int main()
 {
 	SetClock_16MHz();
 	uart_init();
-	dma_gps_receive(buff,255);
-	usart3_interrupt();
-	//dma_monitor_intr();
 	dma_receive_intr();
+//	dma_gps_intr();
+//	delay(2000);
+
+	dma_gps_receive(buff,149);
+	delay(200);
+	disable_gnss(disable_gll,11);
+	delay(200);
+	disable_gnss(disable_gsa,sizeof(disable_gsa));
+	delay(200);
+	disable_gnss(disable_gsv,sizeof(disable_gsv));
+	delay(200);
+	disable_gnss(disable_vtg,sizeof(disable_vtg));
+	delay(200);
+
+
 
     RCC->AHB2ENR|=(1U<<1);
 
@@ -35,38 +50,13 @@ int main()
 
     while(1)
        {
-    	if(read_flag)
-    	{
-    		if(buff[3]=='G')
+    		if(read_flag)
     		{
-    		    gga_flag=1;
-    		read_gga(buff);
-    		}
-    		else if(buff[3]=='R')
-    		{
-    		    rmc_flag=1;
-    		    read_rmc(buff);
-    		}
 
-    		if(gga_flag)
-    		{
-    			gga_flag=0;
-    		    output=convert(gp1.alt);
-    		    uart_write_int(output);
-    		    uart_write("\r\n");
-
-
-    		}
-    		else if(rmc_flag)
-    		{
-    			rmc_flag=0;
-    			output=convert(gp1.time);
-    			uart_write_int(output);
+    			uart_write(buff);
     			uart_write("\r\n");
-
+    			read_flag=0;
     		}
-    		read_flag=0;
-    	}
        }
 
 
@@ -85,7 +75,13 @@ void DMA1_Channel3_IRQHandler()
 	}
 }
 
-
+void DMA1_Channel2_IRQHandler()
+{
+	if(DMA1->ISR & (1U<<5))
+	{
+		DMA1->IFCR|=(1U<<5);
+	}
+}
 
 //void USART3_IRQHandler()
 //{
